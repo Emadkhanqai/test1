@@ -1,4 +1,24 @@
-name: Push to Client's Repo
+# name: Push to Client's Repo
+
+# on:
+#   push:
+#     branches:
+#       - main
+
+# jobs:
+#   deploy:
+#     runs-on: ubuntu-latest
+#     steps:
+#       - name: Checkout code
+#         uses: actions/checkout@v2
+
+#       - name: Push changes to client's repo
+#         run: |
+#           git remote set-url --push client ${{ secrets.CLIENT_REPO_URL }}
+#           git push client main
+
+
+name: Push to client's repo
 
 on:
   push:
@@ -6,13 +26,12 @@ on:
       - main
 
 jobs:
-  deploy:
+  push:
     runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
 
-      - name: Push changes to client's repo
-        run: |
-          git remote set-url --push client ${{ secrets.CLIENT_REPO_URL }}
-          git push client main
+    steps:
+      - name: Push to client's repo
+        uses: actions/push@v2
+        env:
+          repo: ${{ secrets.CLIENT_REPO_URL }}
+          token: ${{ secrets.CLIENT_TOKEN }}
