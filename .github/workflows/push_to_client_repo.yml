@@ -14,5 +14,7 @@ jobs:
 
       - name: Push changes to client's repo
         run: |
-          git remote set-url --push client ${{ secrets.CLIENT_REPO_URL }}
-          git push client main
+          git config --global user.email "emadkhanqai@gmail.com"
+          git config --global user.name "Emad Khan"
+          git remote add client ${{ secrets.CLIENT_REPO_URL }}
+          git push client HEAD:main
